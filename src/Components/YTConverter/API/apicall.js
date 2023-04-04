@@ -1,11 +1,8 @@
 // API - https://rapidapi.com/ytjar/api/youtube-mp36/
 import { options } from "./options";
 
-export const apicall = (userInput) => {
-  // Get only ID from whole youtube video link
-  const regex = /(?<=[\v=]).*?(?=[\&])/;
-  const userInputToID = userInput.match(regex);
-  const api = `https://youtube-mp36.p.rapidapi.com/dl?id=${userInputToID}`;
+export const apicall = (id) => {
+  const api = `https://youtube-mp36.p.rapidapi.com/dl?id=${id}`;
 
   return fetch(api, options)
     .then((response) => response.json())

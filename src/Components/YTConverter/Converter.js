@@ -7,21 +7,33 @@ import styles from "./Converter.module.css";
 function Converter() {
   const [userInput, setUserInput] = useState("");
   const [downloadLink, setDownloadLink] = useState("");
-  const [downloadName, setDownloadName] = useState("")
+  const [downloadName, setDownloadName] = useState("");
 
   const [loading, setLoading] = useState(false);
 
-  const handleSubmition = async(e) => {
+  function getYTLinkID(url) {
+    var regExp =
+      /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
+    var match = url.match(regExp);
+    if (match && match[2].length == 11) {
+      return match[2];
+    } else {
+      // Error
+    }
+  }
+
+  const handleSubmition = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    await apicall(userInput).then((res) => {
-      setDownloadLink(res.link);
+    let videoID = getYTLinkID(userInput); 
 
-      setDownloadName(res.title)
+    await apicall(videoID).then((res) => {
+      setDownloadLink(res.link);
+      setDownloadName(res.title);
       setLoading(false);
     });
-  }
+  };
 
   return (
     <div className={styles.Container}>
@@ -42,7 +54,7 @@ function Converter() {
       {downloadLink && (
         <button className={styles.Download}>
           <a href={downloadLink}>
-            გადმოწერე{" "} <br />
+            გადმოწერე <br />
             {downloadName}
           </a>
         </button>
