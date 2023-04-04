@@ -7,15 +7,18 @@ import styles from "./Converter.module.css";
 function Converter() {
   const [userInput, setUserInput] = useState("");
   const [downloadLink, setDownloadLink] = useState("");
+  const [downloadName, setDownloadName] = useState("")
 
   const [loading, setLoading] = useState(false);
 
-  function handleSubmition(e) {
+  const handleSubmition = async(e) => {
     e.preventDefault();
     setLoading(true);
 
-    apicall(userInput).then((res) => {
+    await apicall(userInput).then((res) => {
       setDownloadLink(res.link);
+
+      setDownloadName(res.title)
       setLoading(false);
     });
   }
@@ -38,8 +41,9 @@ function Converter() {
 
       {downloadLink && (
         <button className={styles.Download}>
-          <a target="_blank" href={downloadLink}>
-            გადმოწერე{" "}
+          <a href={downloadLink}>
+            გადმოწერე{" "} <br />
+            {downloadName}
           </a>
         </button>
       )}
