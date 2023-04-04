@@ -39,6 +39,33 @@
   transition: 0.1s;
 }
 
+.Title {
+  width: 31.5ch;
+  animation: typing 2s steps(22), blink 0.5s step-end infinite alternate,
+    removeBlinker 8s forwards;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes removeBlinker {
+  to {
+    border-right: none;
+  }
+}
+
 .Input:focus {
   border-bottom-color: rgb(43, 47, 158);
 }
@@ -67,13 +94,13 @@
 }
 
 .Download {
-  background-color: white;
-  color: black;
-  padding: 0.15rem 0.75rem;
+    background-color: white;
+    color: black;
+    padding: .15rem .75rem;
 
-  transition: 0.25s;
+    transition: .25s;
 }
 
 .Download:hover {
-  padding: 0.15rem 1.1rem;
+    padding: .15rem 1.1rem;
 }
