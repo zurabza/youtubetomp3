@@ -1,0 +1,79 @@
+.Container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  height: 60vh;
+  width: 60vw;
+
+  margin-top: 6rem;
+
+  background-color: rgb(255, 255, 255);
+}
+
+.FirstRow {
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+
+  padding: 1rem;
+}
+
+.Label {
+  font-size: 0.9rem;
+  margin-bottom: 0.75rem;
+  color: rgb(137, 137, 137);
+}
+
+.Input {
+  width: 40rem;
+
+  border: none;
+  outline: none;
+  padding: 0.25rem 0.5rem;
+  padding-left: 0;
+  padding-bottom: 0.4rem;
+  border-bottom: 2px solid rgb(21, 21, 21);
+
+  transition: 0.1s;
+}
+
+.Input:focus {
+  border-bottom-color: rgb(43, 47, 158);
+}
+
+.Button {
+  margin-top: 1.5rem;
+  background-color: rgb(3, 3, 3);
+
+  color: white;
+  outline: none;
+  border: 1px solid black;
+
+  padding: 0.5rem;
+
+  cursor: pointer;
+
+  transition: 0.2s;
+
+  width: 15rem;
+
+  align-self: center;
+}
+
+.Button:hover {
+  background-color: rgb(53, 53, 53);
+}
+
+.Download {
+  background-color: white;
+  color: black;
+  padding: 0.15rem 0.75rem;
+
+  transition: 0.25s;
+}
+
+.Download:hover {
+  padding: 0.15rem 1.1rem;
+}

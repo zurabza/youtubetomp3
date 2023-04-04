@@ -1,0 +1,13 @@
+body {
+    background-color: rgb(31, 31, 31);
+}
+
+💪 {
+    display: flex;
+    flex-direction: column;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
