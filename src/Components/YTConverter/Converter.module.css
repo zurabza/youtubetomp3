@@ -4,19 +4,17 @@
   justify-content: center;
   align-items: center;
   margin: 0 auto;
-  height: 60vh;
-  width: 60vw;
-
-  margin-top: 6rem;
-
-  background-color: rgb(255, 255, 255);
+  height: 45vh;
+  width: 100vw;
+  margin-top: 3.25rem;
+  border-radius: 3px;
+  background-color: rgb(30, 30, 30);
 }
 
 .FirstRow {
   display: flex;
   justify-content: center;
   flex-direction: column;
-
   padding: 1rem;
 }
 
@@ -30,68 +28,40 @@
 
 .Label {
   font-size: 0.9rem;
-  color: rgb(137, 137, 137);
+  color: rgb(132, 132, 132);
 }
 
 .Input {
   width: 40rem;
 
-  font-size: 1rem;
+  font-size: 1.1rem;
 
   border: none;
   outline: none;
   padding: 0.25rem 0.5rem;
   padding-left: 0;
   padding-bottom: 0.4rem;
-  border-bottom: 2px solid rgb(21, 21, 21);
+  border-bottom: 2px solid white;
 
   transition: 0.15s;
-  opacity: 0.4;
+  color: white;
+
+  opacity: 0.5;
+
+  background-color: transparent;
 }
 
-.Input:focus {
+.Opacity1 {
   opacity: 1;
-  border-bottom-color: black;
-}
-
-.Title {
-  font-size: var(--step-2);
-
-  width: 31.5ch;
-  animation: typing 2s steps(22), blink 0.5s step-end infinite alternate,
-    removeBlinker 8s forwards;
-  white-space: nowrap;
-  overflow: hidden;
-  border-right: 3px solid;
-
-  margin-bottom: 2.5rem;
-}
-
-@keyframes typing {
-  from {
-    width: 0;
-  }
-}
-
-@keyframes blink {
-  50% {
-    border-color: transparent;
-  }
-}
-
-@keyframes removeBlinker {
-  to {
-    border-right: none;
-  }
 }
 
 .Button {
-  margin-top: 1.5rem;
-  background-color: rgb(3, 3, 3);
+  margin-top: 2.5rem;
+  background-color: rgb(170, 170, 170);
 
-  color: white;
+  color: black;
   outline: none;
-  border: 1px solid black;
+  border: none;
 
   padding: 0.5rem;
 
@@ -99,44 +69,67 @@
 
   transition: 0.2s;
 
-  width: 15rem;
-
+  width: 16rem;
+  font-weight: bold;
+  font-size: 1rem;
+  border-radius: 1px;
   align-self: center;
 }
 
 .Button:hover {
-  background-color: rgb(53, 53, 53);
+  background-color: rgb(52, 51, 51);
+  color: rgb(189, 189, 189);
 }
 
 .Download {
-  background-color: white;
-  color: black;
+  background-color: rgb(56, 56, 56);
+  color: rgb(199, 199, 199);
   padding: 0.15rem 0.75rem;
 
+  border: none;
+
   transition: 0.25s;
+  margin-top: 1rem;
 }
 
 .Download:hover {
-  padding: 0.15rem 1.1rem;
+  padding: 0.15rem 2rem;
 }
 
 @media only screen and (max-width: 1150px) {
   .Container {
-    width: 100vw;
-    height: 100vh;
+    width: 93.5vw;
+    height: 62.5vh;
     margin-top: 0;
   }
 
-  .Title {
-    width: 32.5ch;
-    font-size: var(--step-0);
-  }
-
   .Input {
-    width: 20rem;
+    width: 18rem;
   }
 
   .Label {
     font-size: var(--step--2);
+  }
+
+  .Button {
+    font-size: 0.8rem;
+    width: 13rem;
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .Container {
+    width: 100vw;
+    height: 62.5vh;
+    margin-top: 0;
+  }
+
+  .Input {
+    width: 12rem;
+  }
+
+  .Button {
+    font-size: 0.8rem;
+    width: 8rem;
   }
 }

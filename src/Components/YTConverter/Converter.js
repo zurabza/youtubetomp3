@@ -1,33 +1,28 @@
 import React, { useState } from "react";
 
 import { apicall } from "./API/apicall";
+import { getYTVideoID } from "./getYTVideoID";
 
 import styles from "./Converter.module.css";
-import DownArrow from "./../../Images/down-arrow.png";
+import DownArrow from "./down-arrow.png";
 
 function Converter() {
+  const [loading, setLoading] = useState(false);
   const [userInput, setUserInput] = useState("");
   const [downloadLink, setDownloadLink] = useState("");
   const [downloadName, setDownloadName] = useState("");
 
-  const [loading, setLoading] = useState(false);
+  const reset = () => {
+    setUserInput("");
+    setDownloadLink("");
+    setDownloadName("");
+  };
 
-  function getYTLinkID(url) {
-    var regExp =
-      /^.*(youtu\.be\/|v\/|u\/\w\/|embed\/|watch\?v=|\&v=)([^#\&\?]*).*/;
-    var match = url.match(regExp);
-    if (match && match[2].length == 11) {
-      return match[2];
-    } else {
-      // Error
-    }
-  }
-
-  const handleSubmition = async (e) => {
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
 
-    let videoID = getYTLinkID(userInput);
+    let videoID = getYTVideoID(userInput);
 
     await apicall(videoID).then((res) => {
       setDownloadLink(res.link);
@@ -38,33 +33,26 @@ function Converter() {
 
   return (
     <div className={styles.Container}>
-      <h1 className={styles.Title}>Youtube-დან MP3-ში კონვერტაცია</h1>
-
-      <form className={styles.FirstRow} onSubmit={(e) => handleSubmition(e)}>
-        <div style={{marginBottom: '0.5rem'}}>
-          <label className={styles.Label}>შეიყვანე ბმული</label>{" "}
-          <img className={styles.arrow} src={DownArrow} />
+      <div className={styles.FirstRow}>
+        <div style={{ marginBottom: "0.5rem" }}>
+          <label className={styles.Label}>შეიყვანე ბმული</label> 
+          <img className={`${styles.arrow} lightIMG`} src={DownArrow} alt="Arrow" />
         </div>
-        <div>
-          <input
-            className={styles.Input}
-            value={userInput}
-            onChange={(e) => setUserInput(e.target.value)}
-          />
-        </div>
-        <input className={styles.Button} type="submit" value="კონვერტირება" />
-      </form>
 
-      {downloadLink && (
-        <button className={styles.Download}>
-          <a href={downloadLink}>
-            გადმოწერე <br />
-            {downloadName}
-          </a>
+        <input
+          className={userInput ? `${styles.Input} ${styles.Opacity1}` : styles.Input}
+          onChange={(e) => setUserInput(e.target.value)}
+          value={userInput}
+        />
+
+        <button className={styles.Button} onClick={downloadName ? reset : (e) => handleSubmit(e)}>
+          {downloadName ? "დააკონვერტირე ხელახლა" : "კონვერტირება"}
         </button>
-      )}
+      </div>
 
-      {loading && `${(<br />)} მიმდინარეობს კონვერტაცია...`}
+      {downloadLink && <button className={styles.Download}><a href={downloadLink}>გადმოწერე <br /> {downloadName}</a></button>}
+
+      {loading && <p style={{color: 'white'}}><br /> მიმდინარეობს კონვერტაცია...</p>}
     </div>
   );
 }

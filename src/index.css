@@ -16,7 +16,7 @@
 }
 
 body {
-  background-color: rgb(31, 31, 31);
+  background-color:  rgb(25, 25, 25);
 }
 
 💪 {
@@ -27,4 +27,62 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+}
+
+.lightIMG {
+  filter: brightness(0) invert(1);
+}
+
+/* App */
+.App {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.App h1 {
+  color: rgb(233, 233, 233);
+  font-size: var(--step-2);
+
+  width: 31.5ch;
+  animation: typing 2s steps(22), blink 0.5s step-end infinite alternate,
+    removeBlinker 8s forwards;
+  white-space: nowrap;
+  overflow: hidden;
+  border-right: 3px solid;
+
+  text-align: center;
+  margin: 3.5rem auto;
+}
+
+@keyframes typing {
+  from {
+    width: 0;
+  }
+}
+
+@keyframes blink {
+  50% {
+    border-color: transparent;
+  }
+}
+
+@keyframes removeBlinker {
+  to {
+    border-right: none;
+  }
+}
+
+@media only screen and (max-width: 1150px) {
+  .App h1 {
+    width: 32.5ch;
+    font-size: var(--step-0);
+  }
+}
+
+@media only screen and (max-width: 300px) {
+  .App h1 {
+    font-size: var(--step--1);
+  }
 }
