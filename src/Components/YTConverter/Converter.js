@@ -34,25 +34,32 @@ function Converter() {
   return (
     <div className={styles.Container}>
       <div className={styles.FirstRow}>
-        <div style={{ marginBottom: "0.5rem" }}>
-          <label className={styles.Label}>შეიყვანე ბმული</label> 
-          <img className={`${styles.arrow} lightIMG`} src={DownArrow} alt="Arrow" />
-        </div>
+        {!downloadName && (
+          <>
+            <div style={{ marginBottom: "0.5rem" }}>
+              <label className={styles.Label}>შეიყვანე ბმული</label>
+              <img className={`${styles.arrow} lightIMG`} src={DownArrow} alt="Arrow" />
+            </div>
 
-        <input
-          className={userInput ? `${styles.Input} ${styles.Opacity1}` : styles.Input}
-          onChange={(e) => setUserInput(e.target.value)}
-          value={userInput}
-        />
-
+            <input
+              className={userInput ? `${styles.Input} ${styles.Opacity1}` : styles.Input}
+              onChange={(e) => setUserInput(e.target.value)}
+              value={userInput}
+            />
+          </>
+        )}
         <button className={styles.Button} onClick={downloadName ? reset : (e) => handleSubmit(e)}>
           {downloadName ? "დააკონვერტირე ხელახლა" : "კონვერტირება"}
         </button>
       </div>
 
-      {downloadLink && <button className={styles.Download}><a href={downloadLink}>გადმოწერე <br /> {downloadName}</a></button>}
+      {downloadLink && <button className={styles.Download}><a href={downloadLink}><b>გადმოწერე</b> <br />{downloadName}</a></button>}
 
-      {loading && <p style={{color: 'white'}}><br /> მიმდინარეობს კონვერტაცია...</p>}
+      {loading && (
+        <p style={{ color: "white" }}>
+          <br /> მიმდინარეობს კონვერტაცია...
+        </p>
+      )}
     </div>
   );
 }
