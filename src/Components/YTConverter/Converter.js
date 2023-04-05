@@ -1,13 +1,14 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 
 import { apicall } from "./API/apicall";
-import { getYTVideoID } from "./getYTVideoID";
+import { isYTLinkValid, getYTVideoID } from "./functions";
 
 import styles from "./Converter.module.css";
-import DownArrow from "./down-arrow.png";
+import DownArrow from "./images/down-arrow.png";
 
 function Converter() {
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("")
   const [userInput, setUserInput] = useState("");
   const [downloadLink, setDownloadLink] = useState("");
   const [downloadName, setDownloadName] = useState("");
@@ -16,24 +17,37 @@ function Converter() {
     setUserInput("");
     setDownloadLink("");
     setDownloadName("");
+    setError("")
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setError("")
     setLoading(true);
 
-    let videoID = getYTVideoID(userInput);
+    if (isYTLinkValid(userInput)) {
+      let videoID = getYTVideoID(userInput);
 
-    await apicall(videoID).then((res) => {
-      setDownloadLink(res.link);
-      setDownloadName(res.title);
-      setLoading(false);
-    });
+      await apicall(videoID).then((res) => {
+        setDownloadLink(res.link);
+        setDownloadName(res.title);
+        setLoading(false);
+      });
+    }
+
+    if (!isYTLinkValid(userInput)) {
+      setError("ბმული არავალიდურია")
+    }
   };
+
+  useEffect(() => {
+    userInput == "" && setError("")
+    isYTLinkValid(userInput) && setError("")
+  }, [userInput])
 
   return (
     <div className={styles.Container}>
-      <div className={styles.FirstRow}>
+      <form onSubmit={(e) => handleSubmit(e)} className={styles.FirstRow}>
         {!downloadName && (
           <>
             <div style={{ marginBottom: "0.5rem" }}>
@@ -42,6 +56,7 @@ function Converter() {
             </div>
 
             <input
+              style={error ? {borderBottomColor: "#7a0000"} : {}}
               className={userInput ? `${styles.Input} ${styles.Opacity1}` : styles.Input}
               onChange={(e) => setUserInput(e.target.value)}
               value={userInput}
@@ -51,15 +66,15 @@ function Converter() {
         <button className={styles.Button} onClick={downloadName ? reset : (e) => handleSubmit(e)}>
           {downloadName ? "დააკონვერტირე ხელახლა" : "კონვერტირება"}
         </button>
-      </div>
+      </form>
 
       {downloadLink && <button className={styles.Download}><a href={downloadLink}><b>გადმოწერე</b> <br />{downloadName}</a></button>}
 
-      {loading && (
+      {/* {loading && (
         <p style={{ color: "white" }}>
           <br /> მიმდინარეობს კონვერტაცია...
         </p>
-      )}
+      )} */}
     </div>
   );
 }
