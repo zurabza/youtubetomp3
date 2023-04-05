@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import { apicall } from "./API/apicall";
 
 import styles from "./Converter.module.css";
+import DownArrow from "./../../Images/down-arrow.png";
 
 function Converter() {
   const [userInput, setUserInput] = useState("");
@@ -26,7 +27,7 @@ function Converter() {
     e.preventDefault();
     setLoading(true);
 
-    let videoID = getYTLinkID(userInput); 
+    let videoID = getYTLinkID(userInput);
 
     await apicall(videoID).then((res) => {
       setDownloadLink(res.link);
@@ -40,7 +41,10 @@ function Converter() {
       <h1 className={styles.Title}>Youtube-დან MP3-ში კონვერტაცია</h1>
 
       <form className={styles.FirstRow} onSubmit={(e) => handleSubmition(e)}>
-        <label className={styles.Label}>შეიყვანე ბმული</label>
+        <div style={{marginBottom: '0.5rem'}}>
+          <label className={styles.Label}>შეიყვანე ბმული</label>{" "}
+          <img className={styles.arrow} src={DownArrow} />
+        </div>
         <div>
           <input
             className={styles.Input}
@@ -60,7 +64,7 @@ function Converter() {
         </button>
       )}
 
-      {loading && "მიმდინარეობს კონვერტაცია..."}
+      {loading && `${(<br />)} მიმდინარეობს კონვერტაცია...`}
     </div>
   );
 }

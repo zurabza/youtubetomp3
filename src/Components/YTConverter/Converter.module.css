@@ -20,14 +20,23 @@
   padding: 1rem;
 }
 
+.arrow {
+  width: 0.8rem;
+  position: relative;
+  top: 2px;
+  left: 4px;
+  opacity: 0.75;
+}
+
 .Label {
   font-size: 0.9rem;
-  margin-bottom: 0.75rem;
   color: rgb(137, 137, 137);
 }
 
 .Input {
   width: 40rem;
+
+  font-size: 1rem;
 
   border: none;
   outline: none;
@@ -36,16 +45,26 @@
   padding-bottom: 0.4rem;
   border-bottom: 2px solid rgb(21, 21, 21);
 
-  transition: 0.1s;
+  transition: 0.15s;
+  opacity: 0.4;
+}
+
+.Input:focus {
+  opacity: 1;
+  border-bottom-color: black;
 }
 
 .Title {
+  font-size: var(--step-2);
+
   width: 31.5ch;
   animation: typing 2s steps(22), blink 0.5s step-end infinite alternate,
     removeBlinker 8s forwards;
   white-space: nowrap;
   overflow: hidden;
   border-right: 3px solid;
+
+  margin-bottom: 2.5rem;
 }
 
 @keyframes typing {
@@ -64,10 +83,6 @@
   to {
     border-right: none;
   }
-}
-
-.Input:focus {
-  border-bottom-color: rgb(43, 47, 158);
 }
 
 .Button {
@@ -94,13 +109,34 @@
 }
 
 .Download {
-    background-color: white;
-    color: black;
-    padding: .15rem .75rem;
+  background-color: white;
+  color: black;
+  padding: 0.15rem 0.75rem;
 
-    transition: .25s;
+  transition: 0.25s;
 }
 
 .Download:hover {
-    padding: .15rem 1.1rem;
+  padding: 0.15rem 1.1rem;
+}
+
+@media only screen and (max-width: 1150px) {
+  .Container {
+    width: 100vw;
+    height: 100vh;
+    margin-top: 0;
+  }
+
+  .Title {
+    width: 32.5ch;
+    font-size: var(--step-0);
+  }
+
+  .Input {
+    width: 20rem;
+  }
+
+  .Label {
+    font-size: var(--step--2);
+  }
 }
