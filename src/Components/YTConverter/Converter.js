@@ -29,14 +29,12 @@ function Converter() {
       let videoID = getYTVideoID(userInput);
 
       await apicall(videoID).then((res) => {
-        if (res.status == "ok") {
-          setLoading(false);
+        setLoading(false);
 
-          setDownloadLink(res.link);
-          setDownloadName(res.title);
-          setUserInput("");
-          setError("");
-        }
+        setDownloadLink(res.link);
+        setDownloadName(res.title);
+        setUserInput("");
+        setError("");
       });
     }
 

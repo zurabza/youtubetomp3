@@ -39,6 +39,21 @@ a {
   flex-direction: column;
   justify-content: center;
   align-items: center;
+  height: 90vh;
+}
+
+.App .Logo {
+  position: absolute;
+  right: 7.5rem;
+  bottom: 3.5rem;
+  width: 3.5rem;
+}
+
+.App .LogoMP3 {
+  position: absolute;
+  right: 3rem;
+  bottom: 2.7rem;
+  width: 3rem;
 }
 
 .App h1 {
