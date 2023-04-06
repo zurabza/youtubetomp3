@@ -9,6 +9,7 @@
   margin-top: 3.25rem;
   border-radius: 3px;
   background-color: rgb(30, 30, 30);
+  position: relative;
 }
 
 .FirstRow {
@@ -94,6 +95,13 @@
 
 .Download:hover {
   padding: 0.15rem 2rem;
+}
+
+.message {
+  color: rgb(235, 235, 235);
+  margin-block: 10px 20px;
+  height: 0;
+  visibility: hidden;
 }
 
 @media only screen and (max-width: 1150px) {
