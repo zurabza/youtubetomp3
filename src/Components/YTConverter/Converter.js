@@ -18,29 +18,40 @@ function Converter() {
     setUserInput("");
     setDownloadLink("");
     setDownloadName("");
+    
+  };
+
+  const CallAndSet = async () => {
+    if (isYTLinkValid(userInput)) {
+      setLoading(true);
+
+      let videoID = getYTVideoID(userInput);
+      let response = await apicall(videoID);
+
+      if (response.status == "processing") {
+        setTimeout(async () => {
+          CallAndSet();
+        }, 2000);
+      }
+
+      if (response.status == "ok") {
+        setDownloadLink(response.link);
+        setDownloadName(response.title);
+
+        setUserInput("");
+        setError("");
+        setLoading(false);
+      }
+    }
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setLoading(true);
     setError("");
 
-    if (isYTLinkValid(userInput)) {
-      let videoID = getYTVideoID(userInput);
-
-      await apicall(videoID).then((res) => {
-        setLoading(false);
-
-        setDownloadLink(res.link);
-        setDownloadName(res.title);
-        setUserInput("");
-        setError("");
-      });
-    }
+    CallAndSet();
 
     if (userInput && !isYTLinkValid(userInput)) setError("ბმული არავალიდურია");
-
-    setLoading(false);
   };
 
   useEffect(() => {
@@ -73,7 +84,10 @@ function Converter() {
 
       {downloadLink && (
         <button className={styles.Download}>
-          <a href={downloadLink}><b>გადმოწერე</b> <br />{downloadName}</a>
+          <a href={downloadLink}>
+            <b>გადმოწერე</b> <br />
+            {downloadName}
+          </a>
         </button>
       )}
 
