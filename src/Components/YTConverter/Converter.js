@@ -13,57 +13,62 @@ function Converter() {
   const [downloadLink, setDownloadLink] = useState("");
   const [downloadName, setDownloadName] = useState("");
 
+  const reset = () => {
+    setError("");
+    setUserInput("");
+    setDownloadLink("");
+    setDownloadName("");
+  };
+
   const handleSubmit = async (e) => {
     e.preventDefault();
-    setError("");
     setLoading(true);
+    setError("");
 
     if (isYTLinkValid(userInput)) {
       let videoID = getYTVideoID(userInput);
 
       await apicall(videoID).then((res) => {
-        setDownloadLink(res.link);
-        setDownloadName(res.title);
-        setLoading(false);
-
         if (res.status == "ok") {
-          setUserInput("")
-          setError("")
-        }
+          setLoading(false);
 
-        if (res.message.includes("quota")) {
-          // Rate Limit
-          setError("გადმოწერის დღიური ლიმიტი ამოიწურა");
+          setDownloadLink(res.link);
+          setDownloadName(res.title);
+          setUserInput("");
+          setError("");
         }
       });
     }
 
-    if (!isYTLinkValid(userInput)) {
-      setError("ბმული არავალიდურია");
-      setLoading(false);
-    }
+    if (userInput && !isYTLinkValid(userInput)) setError("ბმული არავალიდურია");
+
+    setLoading(false);
   };
 
   useEffect(() => {
-    userInput == "" && setError("");
-    isYTLinkValid(userInput) && setError("");
+    userInput == "" && setError(false);
+    isYTLinkValid(userInput) && setError(false);
   }, [userInput]);
 
   return (
     <div className={styles.Container}>
       <form onSubmit={(e) => handleSubmit(e)} className={styles.FirstRow}>
-        <div style={{ marginBottom: "0.5rem" }}>
-          <label className={styles.Label}>შეიყვანე ბმული</label>
-          <img className={`${styles.arrow} lightIMG`} src={DownArrow} alt="Arrow" />
-        </div>
+        {!downloadLink && (
+          <>
+            <div style={{ marginBottom: "0.5rem" }}>
+              <label className={styles.Label}>შეიყვანე ბმული</label>
+              <img className={`${styles.arrow} lightIMG`} src={DownArrow} alt="Arrow" />
+            </div>
 
-        <input
-          style={error ? { borderBottomColor: "#7a0000" } : {}}
-          className={userInput ? `${styles.Input} ${styles.Opacity1}` : styles.Input}
-          onChange={(e) => setUserInput(e.target.value)}
-          value={userInput}
-        />
-        <button className={styles.Button} onClick={(e) => handleSubmit(e)}>
+            <input
+              style={error ? { borderBottomColor: "#7a0000" } : {}}
+              className={userInput ? `${styles.Input} ${styles.Opacity1}` : styles.Input}
+              onChange={(e) => setUserInput(e.target.value)}
+              value={userInput}
+            />
+          </>
+        )}
+        <button className={styles.Button} onClick={downloadName ? reset : (e) => handleSubmit(e)}>
           {downloadName ? "დააკონვერტირე ხელახლა" : "კონვერტირება"}
         </button>
       </form>
@@ -74,9 +79,13 @@ function Converter() {
         </button>
       )}
 
-      <p style={loading ? {visibility: "visible"} : {}} className={styles.message}>{loading && "მუშავდება..."}</p>
+      <p style={loading ? { visibility: "visible" } : {}} className={styles.message}>
+        {loading && "მუშავდება..."}
+      </p>
 
-      <p style={error ? {visibility: "visible"} : {}} className={styles.message}>{error && error}</p>
+      <p style={error ? { visibility: "visible" } : {}} className={styles.message}>
+        {error && error}
+      </p>
     </div>
   );
 }

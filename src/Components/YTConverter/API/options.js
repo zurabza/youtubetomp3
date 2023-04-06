@@ -1,4 +1,4 @@
-// API - https://rapidapi.com/ytjar/api/youtube-mp36/
+// API - https://rapidapi.com/ytjar/api/youtube-mp3-download1/
 
 export const options = {
   method: "GET",
