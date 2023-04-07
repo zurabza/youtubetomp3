@@ -18,7 +18,6 @@ function Converter() {
     setUserInput("");
     setDownloadLink("");
     setDownloadName("");
-    
   };
 
   const CallAndSet = async () => {
@@ -27,6 +26,16 @@ function Converter() {
 
       let videoID = getYTVideoID(userInput);
       let response = await apicall(videoID);
+
+      if (response.status == "fail") {
+        if (response.msg == "Invalid Video Id") {
+          setError("ბმული არავალიდურია")
+        } else {
+          setError("ვიდეოს მაქსიმალური ხანგრძლივობა 2 საათია")
+        }
+
+        setLoading(false)
+      }
 
       if (response.status == "processing") {
         setTimeout(async () => {
@@ -54,9 +63,10 @@ function Converter() {
     if (userInput && !isYTLinkValid(userInput)) setError("ბმული არავალიდურია");
   };
 
+
   useEffect(() => {
-    userInput == "" && setError(false);
-    isYTLinkValid(userInput) && setError(false);
+    userInput == "" && setError("");
+    isYTLinkValid(userInput) && setError("");
   }, [userInput]);
 
   return (
@@ -91,11 +101,9 @@ function Converter() {
         </button>
       )}
 
-      <p style={loading ? { visibility: "visible" } : {}} className={styles.message}>
+      <p style={loading || error ? { visibility: "visible" } : {}} className={styles.message}>
         {loading && "მუშავდება..."}
-      </p>
 
-      <p style={error ? { visibility: "visible" } : {}} className={styles.message}>
         {error && error}
       </p>
     </div>
