@@ -27,13 +27,10 @@ function Converter() {
       let videoID = getYTVideoID(userInput);
       let response = await apicall(videoID);
 
-      if (response.status == "fail") {
-        if (response.msg == "Invalid Video Id") {
-          setError("ბმული არავალიდურია")
-        } else {
-          setError("ვიდეოს მაქსიმალური ხანგრძლივობა 2 საათია")
-        }
+      console.log(response)
 
+      if (response.status == "fail") {
+        setError(response.msg)
         setLoading(false)
       }
 
