@@ -27,8 +27,6 @@ function Converter() {
       let videoID = getYTVideoID(userInput);
       let response = await apicall(videoID);
 
-      console.log(response)
-
       if (response.status == "fail") {
         setError(response.msg)
         setLoading(false)

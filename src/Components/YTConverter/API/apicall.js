@@ -1,8 +1,8 @@
-// API - https://rapidapi.com/ytjar/api/youtube-mp3-download1/
+// API - https://rapidapi.com/ytjar/api/youtube-mp36
 import { options } from "./options";
 
 export const apicall = (id) => {
-  const api = `https://youtube-mp3-download1.p.rapidapi.com/dl?id=${id}`;
+  const api = `https://youtube-mp36.p.rapidapi.com/dl?id=${id}`;
 
   return fetch(api, options)
     .then((response) => response.json())
