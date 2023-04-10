@@ -35,7 +35,7 @@ function Converter() {
       if (response.status == "processing") {
         setTimeout(async () => {
           CallAndSet();
-        }, 2000);
+        }, 1000);
       }
 
       if (response.status == "ok") {
