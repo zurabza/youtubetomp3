@@ -28,8 +28,8 @@ function Converter() {
       let response = await apicall(videoID);
 
       if (response.status == "fail") {
-        setError(response.msg);
-        setLoading(false);
+        setError(response.msg)
+        setLoading(false)
       }
 
       if (response.status == "processing") {
@@ -58,6 +58,7 @@ function Converter() {
     if (userInput && !isYTLinkValid(userInput)) setError("ბმული არავალიდურია");
   };
 
+
   useEffect(() => {
     userInput == "" && setError("");
     isYTLinkValid(userInput) && setError("");
@@ -70,45 +71,33 @@ function Converter() {
           <>
             <div style={{ marginBottom: "0.5rem" }}>
               <label className={styles.Label}>შეიყვანე ბმული</label>
-              <img
-                className={`${styles.arrow} lightIMG`}
-                src={DownArrow}
-                alt="Arrow"
-              />
+              <img className={`${styles.arrow} lightIMG`} src={DownArrow} alt="Arrow" />
             </div>
 
             <input
               style={error ? { borderBottomColor: "#7a0000" } : {}}
-              className={
-                userInput ? `${styles.Input} ${styles.Opacity1}` : styles.Input
-              }
+              className={userInput ? `${styles.Input} ${styles.Opacity1}` : styles.Input}
               onChange={(e) => setUserInput(e.target.value)}
               value={userInput}
             />
           </>
         )}
-        <button
-          className={styles.Button}
-          onClick={downloadName ? reset : (e) => handleSubmit(e)}
-        >
+        <button className={styles.Button} onClick={downloadName ? reset : (e) => handleSubmit(e)}>
           {downloadName ? "დააკონვერტირე ხელახლა" : "კონვერტირება"}
         </button>
       </form>
 
-      {downloadLink && (
+      {downloadLink && 
         <button className={styles.Download}>
           <a href={downloadLink}>
             <b>გადმოწერე</b> <br />
             {downloadName}
           </a>
         </button>
-      )}
+      }
 
-      <p
-        style={loading || error ? { visibility: "visible" } : {}}
-        className={styles.message}
-      >
-        {loading && "მუშავდება..."}
+      <p style={loading || error ? { visibility: "visible" } : {}} className={styles.message}>
+        {loading && <span className="loading">მუშავდება</span>}
 
         {error && error}
       </p>

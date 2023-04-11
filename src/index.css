@@ -16,7 +16,7 @@
 }
 
 body {
-  background-color:  rgb(25, 25, 25);
+  background-color: rgb(25, 25, 25);
 }
 
 💪 {
@@ -61,8 +61,7 @@ a {
   font-size: var(--step-2);
 
   width: 31.5ch;
-  animation: typing 2s steps(22), blink 0.5s step-end infinite alternate,
-    removeBlinker 8s forwards;
+  animation: typing 2s steps(22), blink 0.5s step-end infinite alternate, removeBlinker 8s forwards;
   white-space: nowrap;
   overflow: hidden;
   border-right: 3px solid;
@@ -99,5 +98,22 @@ a {
 @media only screen and (max-width: 300px) {
   .App h1 {
     font-size: var(--step--1);
+  }
+}
+
+.loading::after {
+  content: "";
+  animation: loading 1s infinite;
+}
+
+@keyframes loading {
+  0% {
+    content: "";
+  }
+  50% {
+    content: ".";
+  }
+  100% {
+    content: "..";
   }
 }
