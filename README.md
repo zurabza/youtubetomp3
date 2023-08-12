@@ -43,6 +43,16 @@ Using the YouTube To MP3 Converter app is straightforward:
 
 Enjoy your favorite YouTube audio content on the go!
 
+## What I've Learned
+
+During the development of this YouTube To MP3 Converter project, I've gained valuable skills and knowledge in various areas:
+
+- **API Integration:** I've learned how to work with external APIs, leveraging the [YouTube MP3 Converter API](https://rapidapi.com/ytjar/api/youtube-mp36) to retrieve data and perform conversions.
+
+- **Environment Variables:** I now understand the importance of securely managing environment variables, using them to store sensitive information like API keys and host details.
+
+- **User Input Handling:** I've become proficient in capturing and processing user input, guiding users through the conversion process and providing a seamless experience.
+
 ## Contributions
 
 Contributions to this project are welcome and encouraged. If you encounter any issues, have ideas for improvements, or want to add new features, feel free to contribute. Here's how you can do it:
